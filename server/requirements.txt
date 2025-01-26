@@ -9,3 +9,4 @@ python-dotenv==1.0.1
 uvicorn==0.15.0
 python-dotenv
 faiss-cpu
+python-multipart
