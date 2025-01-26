@@ -6,3 +6,4 @@ langchain_groq==0.2.3
 langchain_huggingface==0.1.2
 psycopg2==2.9.10
 python-dotenv==1.0.1
+uvicorn==0.15.0
