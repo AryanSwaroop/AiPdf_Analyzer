@@ -8,6 +8,6 @@ psycopg2==2.9.10
 python-dotenv==1.0.1
 uvicorn[standard]==0.23.1
 psycopg2-binary==2.9.8
-PyPDF2==3.0.1
+pypdf
 faiss-cpu==1.7.4
 python-multipart
