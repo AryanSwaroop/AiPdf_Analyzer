@@ -163,6 +163,17 @@ curl -X 'POST' \
   "answer": "This document is a guide to using the API for PDF uploading and querying."
 }
 ```
+## Database Schema
+
+The application uses a PostgreSQL database to store metadata about the uploaded PDF documents. The table schema is as follows:
+
+### `pdf_documents` Table
+
+| Column     | Type         | Description                             |
+|------------|--------------|-----------------------------------------|
+| `id`       | SERIAL       | Primary Key, auto-incremented ID        |
+| `filename` | VARCHAR(255) | The name of the uploaded PDF file       |
+| `upload_date` | TIMESTAMP  | The date and time when the PDF was uploaded |
 
 ---
 
