@@ -1,5 +1,7 @@
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile, Form, Depends
 from fastapi.responses import JSONResponse
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -12,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import tempfile
 import os
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -19,11 +22,12 @@ load_dotenv()
 # Initialize FastAPI app
 app = FastAPI()
 
+# Middleware to allow frontend connections
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Or specify your frontend's domain like "http://localhost:3000"
+    allow_origins=["http://localhost:5173"],  # Or specify your frontend's domain
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -31,14 +35,14 @@ app.add_middleware(
 vector_store = None
 llm = None
 
-# Check if the environment variable is set
+# Check if the environment variable is set for the Groq API key
 groq_api_key = os.getenv('groq_api')
 if groq_api_key:
     llm = ChatGroq(groq_api_key=groq_api_key, model_name="Llama3-8b-8192")
 else:
     raise ValueError("Groq API key not found in the environment variables.")
 
-# Prompt template
+# Prompt template for language model
 prompt_template = ChatPromptTemplate.from_template(
     """
     Answer the questions based on the provided context only.
@@ -50,10 +54,22 @@ prompt_template = ChatPromptTemplate.from_template(
     """
 )
 
+# Database connection setup
+def get_db_connection():
+    conn = psycopg2.connect(
+        dbname=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT")
+    )
+    return conn
+
+# Endpoint for uploading PDF
 @app.post("/upload_pdf/")
 async def upload_pdf(file: UploadFile = File(...)):
     """
-    Upload a PDF file and create a vector database.
+    Upload a PDF file, store it in a vector database, and save metadata in PostgreSQL.
     """
     global vector_store
 
@@ -63,7 +79,20 @@ async def upload_pdf(file: UploadFile = File(...)):
             temp_file.write(file.file.read())
             temp_pdf_path = temp_file.name
 
-        # Load and process the PDF
+        # Connect to PostgreSQL and insert metadata
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Insert metadata (filename and upload date) into the database
+        upload_date = datetime.now()
+        cursor.execute("INSERT INTO pdf_documents (filename, upload_date) VALUES (%s, %s) RETURNING id;", 
+                       (file.filename, upload_date))
+        conn.commit()
+
+        # Fetch the ID of the newly inserted record
+        new_pdf_id = cursor.fetchone()[0]
+
+        # Load and process the PDF document
         embeddings = HuggingFaceEmbeddings(
             model_name='BAAI/bge-small-en-v1.5',
             model_kwargs={'device': 'cpu'},
@@ -72,21 +101,25 @@ async def upload_pdf(file: UploadFile = File(...)):
         loader = PyPDFLoader(temp_pdf_path)
         documents = loader.load()
 
-        # Split the text into chunks
+        # Split the text into chunks for better processing
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         document_chunks = text_splitter.split_documents(documents)
 
-        # Create vector database
+        # Create a vector store for the PDF content
         vector_store = FAISS.from_documents(document_chunks, embeddings)
 
-        # Clean up temporary file after processing
+        # Clean up the temporary file after processing
         os.remove(temp_pdf_path)
 
-        return JSONResponse(content={"message": "Vector database created successfully"}, status_code=200)
+        cursor.close()
+        conn.close()
+
+        return JSONResponse(content={"message": "Vector database created successfully and metadata saved.", "pdf_id": new_pdf_id}, status_code=200)
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
+# Endpoint for asking questions based on the uploaded PDF
 @app.post("/ask_question/")
 async def ask_question(question: str = Form(...)):
     """
@@ -98,12 +131,12 @@ async def ask_question(question: str = Form(...)):
         return JSONResponse(content={"error": "Vector database not initialized. Please upload a PDF first."}, status_code=400)
 
     try:
-        # Create the retrieval chain
+        # Create the retrieval chain for answering questions
         document_chain = create_stuff_documents_chain(llm, prompt_template)
         retriever = vector_store.as_retriever()
         retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
-        # Get the response
+        # Get the response from the retrieval chain
         response = retrieval_chain.invoke({'input': question})
 
         return JSONResponse(content={"answer": response['answer']}, status_code=200)

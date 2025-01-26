@@ -17,10 +17,20 @@ const Navbar = () => {
     
     const handleFileChange = (event : any) => {
         const file = event.target.files[0];
+
+
+
         if (file) {
-        uploadFile(file);
-        console.log("Selected file:", file.name);
-        setFileName(file.name);
+
+        if (file.type === 'application/pdf') {
+                console.log("This is a PDF file");
+                uploadFile(file);
+                console.log("Selected file:", file.name);
+                setFileName(file.name);
+        } else {
+            alert("Please select a PDF file");
+        }
+        
         }
     };
 
