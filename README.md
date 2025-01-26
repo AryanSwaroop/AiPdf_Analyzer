@@ -1,6 +1,5 @@
-Sure! Here is the markdown code for your `README.md` that you can directly use for your GitHub repository:
 
-```markdown
+
 # PDF Upload and Query API
 
 This FastAPI application allows users to upload PDF documents, store their content in a vector database, and perform queries to extract relevant information based on the uploaded PDFs. The application uses various technologies such as FastAPI, PostgreSQL, Langchain, and FAISS for vector storage.
@@ -138,6 +137,4 @@ This project is licensed under the MIT License.
 2. Create a new branch.
 3. Make your changes.
 4. Submit a pull request.
-```
 
-You can copy and paste this code into the `README.md` file in the root of your repository. It will provide a clear guide for setting up, running, and using your project.
