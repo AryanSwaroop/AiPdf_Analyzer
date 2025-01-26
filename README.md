@@ -225,6 +225,16 @@ AiPdf_Analyzer/
 This project is licensed under the MIT License. Feel free to use and contribute.
 
 ---
+# Handheld UI 
+
+![Screenshot 2025-01-27 023902](https://github.com/user-attachments/assets/f0964f1e-f205-4f16-b50d-a6378a80d8fe)
+
+---
+# Desktop UI
+
+![Screenshot 2025-01-27 023741](https://github.com/user-attachments/assets/af960382-08db-4034-a411-ac8036b3528c)
+
+---
 
 ## Contributing
 
