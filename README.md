@@ -152,7 +152,7 @@ curl -X 'POST' \
 curl -X 'POST' \
   'http://127.0.0.1:8000/ask_question/' \
   -H 'accept: application/json' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Content-Type:  multipart/form-data' \
   -d 'question=What is the purpose of this document?'
 ```
 
