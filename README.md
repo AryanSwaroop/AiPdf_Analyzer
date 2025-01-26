@@ -1,64 +1,122 @@
+# PDF Upload and Query API with Client Interface
 
-
-# PDF Upload and Query API
-
-This FastAPI application allows users to upload PDF documents, store their content in a vector database, and perform queries to extract relevant information based on the uploaded PDFs. The application uses various technologies such as FastAPI, PostgreSQL, Langchain, and FAISS for vector storage.
+This project consists of a **FastAPI server** for uploading PDF documents, storing their content in a vector database, and querying them using natural language. Additionally, it includes a **frontend client** built with **Vite**, **React**, **TypeScript**, and **Tailwind CSS** that provides a user-friendly interface for interacting with the API.
 
 ## Features
 
-- Upload PDF files and store metadata in a PostgreSQL database.
-- Process and convert the content of PDFs into vector embeddings using HuggingFace embeddings.
-- Store the vector representations in a FAISS vector store.
-- Query the vector store with natural language questions and receive context-based answers.
-- CORS enabled for frontend integration.
+### Server Features:
+- Upload PDF documents via API and store their metadata in a PostgreSQL database.
+- Process PDFs into vector embeddings using HuggingFace embeddings and store them in FAISS for efficient querying.
+- Query uploaded PDFs with natural language and receive context-based answers.
+
+### Client Features:
+- Intuitive interface for uploading PDF files and asking questions.
+- Real-time feedback and responses displayed to the user.
+- Built with modern technologies including Vite, TypeScript, and Tailwind CSS for a sleek, responsive UI.
+
+---
 
 ## Technologies Used
 
-- **FastAPI**: A fast web framework for building APIs with Python.
-- **PostgreSQL**: A relational database to store metadata about uploaded PDF documents.
-- **FAISS**: A library for efficient similarity search and clustering of dense vectors.
-- **Langchain**: A framework for working with language models, document chains, and embedding models.
-- **HuggingFace Embeddings**: Pre-trained embeddings from HuggingFace to convert text into vector representations.
-- **Groq API**: For using large-scale language models for query processing.
+### Server:
+- **FastAPI**: For building the backend API.
+- **PostgreSQL**: To store metadata about uploaded PDFs.
+- **FAISS**: For efficient vector storage and retrieval.
+- **Langchain**: Framework for language model integrations.
+- **HuggingFace Embeddings**: For generating vector representations of PDF content.
 
-## Requirements
+### Client:
+- **React**: For building the UI.
+- **TypeScript**: For a type-safe codebase.
+- **Vite**: For fast development and bundling.
+- **Tailwind CSS**: For styling and responsive design.
 
-Before running the project, make sure you have the following dependencies installed:
+---
+
+## Installation and Setup
+
+### Prerequisites
 
 - Python 3.8+
+- Node.js and npm
 - PostgreSQL database (local or remote)
-- Dependencies listed in `requirements.txt`
 
-### Install dependencies
+---
 
-You can install the required dependencies using pip:
+### Backend Setup (Server)
 
-```bash
-pip install -r requirements.txt
-```
+1. Clone the repository:
 
-### Environment Variables
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+   ```
 
-Create a `.env` file in the root directory of your project and add the following variables:
+2. Create a virtual environment and activate it:
 
-```env
-DB_NAME=your_database_name
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_HOST=your_database_host
-DB_PORT=your_database_port
-groq_api=your_groq_api_key
-```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
 
-Make sure to replace the placeholders with actual values.
+3. Install backend dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configure environment variables by creating a `.env` file in the root directory with the following content:
+
+   ```env
+   DB_NAME=your_database_name
+   DB_USER=your_database_user
+   DB_PASSWORD=your_database_password
+   DB_HOST=your_database_host
+   DB_PORT=your_database_port
+   groq_api=your_groq_api_key
+   ```
+
+5. Start the server:
+
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+The server will run at `http://localhost:5000`.
+
+---
+
+### Frontend Setup (Client)
+
+1. Navigate to the `client` directory:
+
+   ```bash
+   cd client
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+The client will be accessible at `http://localhost:5173`.
+
+---
 
 ## API Endpoints
 
-### 1. `/upload_pdf/`
+### 1. `/upload_pdf/` (Server)
 
 - **Method**: POST
-- **Description**: Upload a PDF document, store its content in a vector database, and save the metadata in PostgreSQL.
-- **Parameters**: 
+- **Description**: Upload a PDF document, store its metadata in the database, and save its content in a vector store.
+- **Parameters**:
   - `file`: The PDF file to upload (Multipart/Form-Data).
 
 **Example Request**:
@@ -79,10 +137,12 @@ curl -X 'POST' \
 }
 ```
 
-### 2. `/ask_question/`
+---
+
+### 2. `/ask_question/` (Server)
 
 - **Method**: POST
-- **Description**: Ask a question based on the uploaded PDFs, and receive an answer generated from the document context.
+- **Description**: Ask a question based on the uploaded PDFs, and receive an answer.
 - **Parameters**:
   - `question`: The question to ask (Form-Data).
 
@@ -104,32 +164,40 @@ curl -X 'POST' \
 }
 ```
 
-## Database Schema
+---
 
-The application uses a PostgreSQL database to store metadata about the uploaded PDF documents. The table schema is as follows:
+## Client Functionality
 
-### `pdf_documents` Table
+The client provides a bot-like interface where users can:
 
-| Column     | Type         | Description                             |
-|------------|--------------|-----------------------------------------|
-| `id`       | SERIAL       | Primary Key, auto-incremented ID        |
-| `filename` | VARCHAR(255) | The name of the uploaded PDF file       |
-| `upload_date` | TIMESTAMP  | The date and time when the PDF was uploaded |
+1. Upload a PDF document directly from their browser.
+2. Input questions related to the uploaded document.
+3. Receive context-aware answers from the server.
 
-## Running the Application
+---
 
-1. Start the PostgreSQL database and make sure the `.env` file is configured properly.
-2. Run the FastAPI application:
+## Folder Structure
 
-```bash
-uvicorn main:app --reload
+```plaintext
+.
+├── client/                 # Frontend code
+│   ├── src/                # React components and logic
+│   ├── public/             # Static files
+│   └── package.json        # Frontend dependencies
+├── server/                 # Backend code
+│   ├── main.py             # FastAPI server
+│   ├── requirements.txt    # Backend dependencies
+│   └── .env                # Environment variables
+└── README.md               # Project documentation
 ```
 
-The application will be accessible at `http://localhost:5000`.
+---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. Feel free to use and contribute.
+
+---
 
 ## Contributing
 
@@ -138,3 +206,8 @@ This project is licensed under the MIT License.
 3. Make your changes.
 4. Submit a pull request.
 
+---
+
+## Contact
+
+For any issues or questions, feel free to open an issue or reach out to the maintainer.
