@@ -25,7 +25,7 @@ app = FastAPI()
 # Middleware to allow frontend connections
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-pdf-analyzer-questioner.vercel.app"], 
+    allow_origins=["http://localhost:5173"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -137,7 +137,7 @@ async def upload_pdf(file: UploadFile = File(...)):
         cursor.close()
         conn.close()
 
-        return JSONResponse(content={"message": "Vector database created successfully and metadata saved.", "pdf_id": new_pdf_id}, status_code=200)
+        return JSONResponse(content={"message": "Vector database created successfully and metadata saved."}, status_code=200)
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
