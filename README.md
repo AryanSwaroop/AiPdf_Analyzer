@@ -82,7 +82,7 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
    uvicorn main:app --reload
    ```
 
-The server will run at `http://localhost:5000`.
+The server will run at `http://127.0.0.1:8000`.
 
 ---
 
@@ -123,7 +123,7 @@ The client will be accessible at `http://localhost:5173`.
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:5000/upload_pdf/' \
+  'http://127.0.0.1:8000/upload_pdf/' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@path_to_your_pdf.pdf'
@@ -150,7 +150,7 @@ curl -X 'POST' \
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:5000/ask_question/' \
+  'http://127.0.0.1:8000/ask_question/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
   -d 'question=What is the purpose of this document?'
@@ -179,16 +179,32 @@ The client provides a bot-like interface where users can:
 ## Folder Structure
 
 ```plaintext
-.
-├── client/                 # Frontend code
-│   ├── src/                # React components and logic
-│   ├── public/             # Static files
-│   └── package.json        # Frontend dependencies
-├── server/                 # Backend code
-│   ├── main.py             # FastAPI server
-│   ├── requirements.txt    # Backend dependencies
-│   └── .env                # Environment variables
+
+AiPdf_Analyzer/
+├── client/                 # Frontend application
+│   ├── public/             # Public assets
+│   ├── src/                # Source code
+│   │   ├── components/     # React components
+│   │   ├── pages/          # Application pages
+│   │   ├── App.tsx         # Main application component
+│   │   ├── main.tsx        # Entry point
+│   │   └── ...             # Other source files
+│   ├── index.html          # HTML template
+│   ├── package.json        # NPM package configuration
+│   ├── postcss.config.js   # PostCSS configuration
+│   ├── tailwind.config.js  # Tailwind CSS configuration
+│   └── tsconfig.json       # TypeScript configuration
+│
+├── server/                 # Backend application
+│   ├── main.py             # FastAPI application
+│   ├── requirements.txt    # Python dependencies
+│   └── ...                 # Other server files
+│
+├── .env                    # Environment variables
+├── .gitignore              # Git ignore file
+├── LICENSE                 # License file
 └── README.md               # Project documentation
+
 ```
 
 ---
