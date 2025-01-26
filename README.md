@@ -1,4 +1,4 @@
-# PDF Upload and Query API with Client Interface
+# Ai Pdf Analysis and Question Answer Bot
 
 This project consists of a **FastAPI server** for uploading PDF documents, storing their content in a vector database, and querying them using natural language. Additionally, it includes a **frontend client** built with **Vite**, **React**, **TypeScript**, and **Tailwind CSS** that provides a user-friendly interface for interacting with the API.
 
