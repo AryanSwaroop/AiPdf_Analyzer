@@ -185,7 +185,7 @@ AiPdf_Analyzer/
 │   ├── public/             # Public assets
 │   ├── src/                # Source code
 │   │   ├── components/     # React components
-│   │   ├── pages/          # Application pages
+│   │   ├── util/           # Application utilities
 │   │   ├── App.tsx         # Main application component
 │   │   ├── main.tsx        # Entry point
 │   │   └── ...             # Other source files
