@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, Form, Depends
+from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import JSONResponse
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -64,6 +64,29 @@ def get_db_connection():
         port=os.getenv("DB_PORT")
     )
     return conn
+
+# Create the pdf_documents table if it doesn't exist
+def create_table_if_not_exists():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # SQL to create the table if it does not exist
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS pdf_documents (
+                id SERIAL PRIMARY KEY,
+                filename VARCHAR(255) NOT NULL,
+                upload_date TIMESTAMP NOT NULL
+            );
+        """)
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        print(f"Error creating table: {str(e)}")
+
+# Call the function to ensure the table exists when the application starts
+create_table_if_not_exists()
 
 # Endpoint for uploading PDF
 @app.post("/upload_pdf/")
