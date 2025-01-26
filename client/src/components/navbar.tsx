@@ -6,6 +6,8 @@ const Navbar = () => {
 
     const fileref = useRef<HTMLInputElement | null>(null);
 
+    const [reading , setreading] = useState(true);
+
     const [fileName , setFileName] = useState(null);
     
     const handleButtonClick = () => {
@@ -24,6 +26,7 @@ const Navbar = () => {
 
         if (file.type === 'application/pdf') {
                 console.log("This is a PDF file");
+                setreading(true);
                 uploadFile(file);
                 console.log("Selected file:", file.name);
                 setFileName(file.name);
@@ -41,6 +44,7 @@ const Navbar = () => {
         try {
           const response = await apiClient.post(api_endpoints.pdf , formData);
           console.log('Upload successful:', response.data);
+          setreading(false);
         } catch (error) {
           console.error('Error uploading:', error);
         }
@@ -54,6 +58,8 @@ const Navbar = () => {
 
         {
 
+            !reading 
+            && 
             fileName 
             &&
             <div className='flex flex-row'>
@@ -62,6 +68,15 @@ const Navbar = () => {
             </div>
 
         }
+
+        {
+            reading 
+            && 
+            fileName 
+            && 
+            <div className='text-green-500 m-auto mr-7 font-semibold'>Reading ...</div>
+        }
+
         <form onSubmit={(e) => {e.preventDefault()}}>
             <input type='file' className='hidden' ref={fileref} onChange={handleFileChange}/> 
             <button onClick={handleButtonClick} className="h-8 w-fit p-auto pr-3 pl-3 flex flex-row border-1 border-black text-center justify-center mr-4 rounded-sm bg-white hover:bg-green-300">
