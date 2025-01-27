@@ -14,6 +14,11 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
 - Real-time feedback and responses displayed to the user.
 - Built with modern technologies including Vite, TypeScript, and Tailwind CSS for a sleek, responsive UI.
 
+### Innovations
+- Added Chat Scroll Option for going through chat history.
+- Added Reading and File Ready to answer Indicator
+- Added Chat Saving through PDF Option so that users can save their chat history as a pdf for future references.
+  
 ---
 
 ## Technologies Used
