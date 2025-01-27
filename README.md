@@ -1,5 +1,6 @@
 # Ai Pdf Analysis and Question Answer Bot
 
+## Disclaimer : server is a spin down server so it will be sleeping on first request , it takes 1 - 2 minutes to go live again ! So , please be patient while testing.
 This project consists of a **FastAPI server** for uploading PDF documents, storing their content in a vector database, and querying them using natural language. Additionally, it includes a **frontend client** built with **Vite**, **React**, **TypeScript**, and **Tailwind CSS** that provides a user-friendly interface for interacting with the API.
 
 ## Features
