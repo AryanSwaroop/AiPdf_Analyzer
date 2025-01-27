@@ -227,12 +227,12 @@ This project is licensed under the MIT License. Feel free to use and contribute.
 ---
 # Handheld UI 
 
-![Screenshot 2025-01-27 023902](https://github.com/user-attachments/assets/f0964f1e-f205-4f16-b50d-a6378a80d8fe)
+![image](https://github.com/user-attachments/assets/afc8ae10-1e8a-408b-ab0f-470005a87fcf)
 
 ---
 # Desktop UI
 
-![Screenshot 2025-01-27 023741](https://github.com/user-attachments/assets/af960382-08db-4034-a411-ac8036b3528c)
+![image](https://github.com/user-attachments/assets/fea452ee-6ea4-42be-b9b7-8cb096a5d045)
 
 ---
 
