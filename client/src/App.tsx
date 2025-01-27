@@ -4,11 +4,9 @@ import Textfield from './util/textfield';
 import { useState, useEffect, useRef } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {ChildDataTypeFunction} from './types/main';
 
-export interface ChildDataTypeFunction {
-  question: string;
-  answer: string;
-}
+
 
 function App() {
   const [messages, setMessages] = useState<{ body: string; chat: string }[]>([]); // Array to hold all chat messages

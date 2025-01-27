@@ -1,7 +1,4 @@
-interface TextfieldProps {
-    body: string;
-    chat: string;
-  }
+import {TextfieldProps} from "../types/main";
   
   const Textfield = ({ body , chat }: TextfieldProps) => {
     return (

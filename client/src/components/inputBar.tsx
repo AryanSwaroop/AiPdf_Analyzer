@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import apiClient from '../API/axios_instance';
 import { api_endpoints } from '../API/api_endpoints';
-import { ChildDataTypeFunction } from '../App';
+import {ChildDataTypeFunction} from '../types/main';
 
 // Define the callback interface
 export interface callBackType {
