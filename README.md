@@ -1,5 +1,9 @@
 # Ai Pdf Analysis and Question Answer Bot
 
+## Hosted Client : https://ai-pdf-analyzer-questioner.vercel.app/
+
+### Hosted API : https://aipdf-analyzer.onrender.com
+
 ## Disclaimer : server is a spin down server so it will be sleeping on first request , it takes 1 - 2 minutes to go live again ! So , please be patient while testing.
 
 This project consists of a **FastAPI server** for uploading PDF documents, storing their content in a vector database, and querying them using natural language. Additionally, it includes a **frontend client** built with **Vite**, **React**, **TypeScript**, and **Tailwind CSS** that provides a user-friendly interface for interacting with the API.
@@ -119,8 +123,6 @@ The client will be accessible at `http://localhost:5173`.
 
 ## API Endpoints
 
-### Hosted API : https://aipdf-analyzer.onrender.com
-
 ### 1. `/upload_pdf/` (Server)
 
 - **Method**: POST
@@ -187,8 +189,6 @@ The application uses a PostgreSQL database to store metadata about the uploaded 
 ---
 
 ## Client Functionality
-
-## Hosted Client : https://ai-pdf-analyzer-questioner.vercel.app/
 
 The client provides a bot-like interface where users can:
 
