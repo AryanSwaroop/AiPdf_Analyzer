@@ -186,6 +186,8 @@ The application uses a PostgreSQL database to store metadata about the uploaded 
 
 ## Client Functionality
 
+## Hosted Client : https://ai-pdf-analyzer-questioner.vercel.app/
+
 The client provides a bot-like interface where users can:
 
 1. Upload a PDF document directly from their browser.
