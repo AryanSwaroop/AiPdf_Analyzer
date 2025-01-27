@@ -222,9 +222,6 @@ AiPdf_Analyzer/
 └── README.md               # Project documentation
 
 ```
-
----
-
 ## License
 
 This project is licensed under the MIT License. Feel free to use and contribute.
@@ -241,6 +238,18 @@ This project is licensed under the MIT License. Feel free to use and contribute.
 
 ---
 
+# Innovations ScreenShots
+
+### Server Ready Indicator :- 
+![image](https://github.com/user-attachments/assets/5ff76235-8bfe-4fbb-879a-577f4352d37c)
+
+### Chat to PDF :- 
+![image](https://github.com/user-attachments/assets/df8a4fb6-1bb2-44a4-a440-b9999ec4735f)
+
+## Scrolling Feature :-
+![image](https://github.com/user-attachments/assets/65ebad9e-3256-459d-a17b-3fe14aea01a8)
+
+---
 ## Contributing
 
 1. Fork the repository.
