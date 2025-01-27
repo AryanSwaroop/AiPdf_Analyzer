@@ -17,7 +17,7 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
 ### Innovations
 - Added Chat Scroll Option for going through chat history.
 - Added Indicator to tell if server is ready or not for questions.
-- Added Chat Saving through PDF Option so that users can save their chat history as a pdf for future references.
+- Added Chat Saving through PDF so that users can save their chat history for future references.
   
 ---
 
