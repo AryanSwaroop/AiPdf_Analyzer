@@ -14,6 +14,11 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
 - Real-time feedback and responses displayed to the user.
 - Built with modern technologies including Vite, TypeScript, and Tailwind CSS for a sleek, responsive UI.
 
+### Innovations
+- Added Chat Scroll Option for going through chat history.
+- Added Indicator to tell if server is ready or not for questions.
+- Added Chat Saving through PDF so that users can save their chat history for future references.
+  
 ---
 
 ## Technologies Used
@@ -79,10 +84,10 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
 5. Start the server:
 
    ```bash
-   uvicorn main:app --reload
+   uvicorn main:app --host 0.0.0.0 --port 5000 --reload 
    ```
 
-The server will run at `http://127.0.0.1:8000`.
+The server will run at `http://0.0.0.0:5000`.
 
 ---
 
@@ -112,6 +117,8 @@ The client will be accessible at `http://localhost:5173`.
 
 ## API Endpoints
 
+### Hosted API : https://aipdf-analyzer.onrender.com
+
 ### 1. `/upload_pdf/` (Server)
 
 - **Method**: POST
@@ -123,7 +130,7 @@ The client will be accessible at `http://localhost:5173`.
 
 ```bash
 curl -X 'POST' \
-  'http://127.0.0.1:8000/upload_pdf/' \
+  'http://0.0.0.0:5000/upload_pdf/' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@path_to_your_pdf.pdf'
@@ -150,7 +157,7 @@ curl -X 'POST' \
 
 ```bash
 curl -X 'POST' \
-  'http://127.0.0.1:8000/ask_question/' \
+  'http://0.0.0.0:5000/ask_question/' \
   -H 'accept: application/json' \
   -H 'Content-Type:  multipart/form-data' \
   -d 'question=What is the purpose of this document?'
@@ -179,11 +186,14 @@ The application uses a PostgreSQL database to store metadata about the uploaded 
 
 ## Client Functionality
 
+## Hosted Client : https://ai-pdf-analyzer-questioner.vercel.app/
+
 The client provides a bot-like interface where users can:
 
 1. Upload a PDF document directly from their browser.
 2. Input questions related to the uploaded document.
 3. Receive context-aware answers from the server.
+4. Export or save chat history as a pdf. 
 
 ---
 
@@ -217,9 +227,6 @@ AiPdf_Analyzer/
 └── README.md               # Project documentation
 
 ```
-
----
-
 ## License
 
 This project is licensed under the MIT License. Feel free to use and contribute.
@@ -227,15 +234,27 @@ This project is licensed under the MIT License. Feel free to use and contribute.
 ---
 # Handheld UI 
 
-![Screenshot 2025-01-27 023902](https://github.com/user-attachments/assets/f0964f1e-f205-4f16-b50d-a6378a80d8fe)
+![image](https://github.com/user-attachments/assets/afc8ae10-1e8a-408b-ab0f-470005a87fcf)
 
 ---
 # Desktop UI
 
-![Screenshot 2025-01-27 023741](https://github.com/user-attachments/assets/af960382-08db-4034-a411-ac8036b3528c)
+![image](https://github.com/user-attachments/assets/fea452ee-6ea4-42be-b9b7-8cb096a5d045)
 
 ---
 
+# Innovations ScreenShots
+
+### Server Ready Indicator :- 
+![image](https://github.com/user-attachments/assets/5ff76235-8bfe-4fbb-879a-577f4352d37c)
+
+### Chat to PDF :- 
+![image](https://github.com/user-attachments/assets/df8a4fb6-1bb2-44a4-a440-b9999ec4735f)
+
+## Scrolling Feature :-
+![image](https://github.com/user-attachments/assets/65ebad9e-3256-459d-a17b-3fe14aea01a8)
+
+---
 ## Contributing
 
 1. Fork the repository.
