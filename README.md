@@ -84,10 +84,10 @@ This project consists of a **FastAPI server** for uploading PDF documents, stori
 5. Start the server:
 
    ```bash
-   uvicorn main:app --reload
+   uvicorn main:app --host 0.0.0.0 --port 5000 --reload 
    ```
 
-The server will run at `http://127.0.0.1:8000`.
+The server will run at `http://0.0.0.0:5000`.
 
 ---
 
@@ -117,6 +117,8 @@ The client will be accessible at `http://localhost:5173`.
 
 ## API Endpoints
 
+### Hosted API : https://aipdf-analyzer.onrender.com
+
 ### 1. `/upload_pdf/` (Server)
 
 - **Method**: POST
@@ -128,7 +130,7 @@ The client will be accessible at `http://localhost:5173`.
 
 ```bash
 curl -X 'POST' \
-  'http://127.0.0.1:8000/upload_pdf/' \
+  'http://0.0.0.0:5000/upload_pdf/' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@path_to_your_pdf.pdf'
@@ -155,7 +157,7 @@ curl -X 'POST' \
 
 ```bash
 curl -X 'POST' \
-  'http://127.0.0.1:8000/ask_question/' \
+  'http://0.0.0.0:5000/ask_question/' \
   -H 'accept: application/json' \
   -H 'Content-Type:  multipart/form-data' \
   -d 'question=What is the purpose of this document?'
