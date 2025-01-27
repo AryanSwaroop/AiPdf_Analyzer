@@ -189,6 +189,7 @@ The client provides a bot-like interface where users can:
 1. Upload a PDF document directly from their browser.
 2. Input questions related to the uploaded document.
 3. Receive context-aware answers from the server.
+4. Export or save chat history as a pdf. 
 
 ---
 
