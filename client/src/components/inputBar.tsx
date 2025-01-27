@@ -15,6 +15,8 @@ const InputBar = ({ callback }: callBackType) => {
   const [answer, setAnswer] = useState('');
 
   useEffect(() => {
+
+    //check if callback doesn't just give out empty answer string. 
     if(answer !== ''){
         callback({question , answer}); 
     }
@@ -31,6 +33,7 @@ const InputBar = ({ callback }: callBackType) => {
     }
   };
 
+  // To handle submission of the question.
   const handleQuestionSubmission = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     uploadQuestion(question);

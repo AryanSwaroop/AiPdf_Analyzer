@@ -2,6 +2,8 @@
 // const frontend = "http://localhost:5173"
 // const frontend_origin = "localhost:5173"
 
+// These are the API endpoints that we need to use in order of requests and responses.
+
 const backend =  "https://aipdf-analyzer.onrender.com"
 const frontend = "https://ai-pdf-analyzer-questioner.vercel.app/"
 const frontend_origin = "ai-pdf-analyzer-questioner.vercel.app"
