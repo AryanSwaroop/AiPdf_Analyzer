@@ -206,7 +206,7 @@ AiPdf_Analyzer/
 │   ├── public/             # Public assets
 │   ├── src/                # Source code
 │   │   ├── components/     # React components
-│   │   ├── util/           # Application utilities
+│   │   ├── types/          # Application Interfaces
 │   │   ├── App.tsx         # Main application component
 │   │   ├── main.tsx        # Entry point
 │   │   └── ...             # Other source files
@@ -255,6 +255,12 @@ This project is licensed under the MIT License. Feel free to use and contribute.
 ![image](https://github.com/user-attachments/assets/65ebad9e-3256-459d-a17b-3fe14aea01a8)
 
 ---
+### Working Sample
+
+https://github.com/user-attachments/assets/9ff33eea-6b25-4b65-a143-c955030e4799
+
+---
+
 ## Contributing
 
 1. Fork the repository.
